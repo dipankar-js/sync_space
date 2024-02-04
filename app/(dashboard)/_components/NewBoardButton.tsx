@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation'
+
 import { api } from '@/convex/_generated/api'
 import useApiMutation from '@/hooks/useApiMutation'
 import { cn } from '@/lib/utils'
@@ -11,6 +13,7 @@ interface NewBoardButtonProps {
 }
 
 const NewBoardButton = ({ orgId, disabled }: NewBoardButtonProps) => {
+    const router = useRouter()
     const { mutate, isLoading } = useApiMutation(api.board.create)
 
     const handleCreateBoard = () => {
@@ -20,6 +23,7 @@ const NewBoardButton = ({ orgId, disabled }: NewBoardButtonProps) => {
         })
             .then((id) => {
                 toast.success('Board created')
+                router.push(`/board/${id}`)
             })
             .catch(() => toast.error('Failed to create board'))
     }
