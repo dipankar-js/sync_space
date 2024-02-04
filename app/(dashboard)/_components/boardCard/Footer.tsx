@@ -8,7 +8,7 @@ interface FooterProps {
     authorLabel: string
     createdAtLabel: string
     isFavourite: boolean
-    onClick: () => void
+    toggleFavorite: () => void
     disabled: boolean
 }
 
@@ -17,9 +17,17 @@ const Footer = ({
     authorLabel,
     createdAtLabel,
     isFavourite,
-    onClick,
+    toggleFavorite,
     disabled,
 }: FooterProps) => {
+    const handleFavorite = (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        event.stopPropagation()
+        event.preventDefault()
+        toggleFavorite()
+    }
+
     return (
         <div className="relative bg-white p-3">
             <p className="text-[13px] truncate max-w-[calc(100%-20px)]">
@@ -33,6 +41,7 @@ const Footer = ({
                     'opacity-0 group-hover:opacity-100 translate absolute top-3 right-3 text-muted-foreground hover:text-blue-600',
                     disabled && 'cursor-not-allowed opacity-75'
                 )}
+                onClick={handleFavorite}
             >
                 <Star
                     className={cn(
