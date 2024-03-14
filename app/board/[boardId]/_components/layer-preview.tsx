@@ -1,18 +1,20 @@
 'use client'
+import { memo } from 'react'
 
 import { useStorage } from '@/liveblocks.config'
 import { LayerType } from '@/types/canvas'
-import { memo } from 'react'
+
+import Rectangle from './Rectangle'
 
 interface LayerPreviewProps {
     id: string
-    onLayerPointDown: (e: React.PointerEvent, layerId: string) => void
+    onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void
     selectionColor?: string
 }
 
 const LayerPreview = ({
     id,
-    onLayerPointDown,
+    onLayerPointerDown,
     selectionColor,
 }: LayerPreviewProps) => {
     const layer = useStorage((root) => root.layers.get(id))
@@ -23,7 +25,14 @@ const LayerPreview = ({
 
     switch (layer.type) {
         case LayerType.Rectangle:
-            return <div>Rectangle</div>
+            return (
+                <Rectangle
+                    id={id}
+                    onPointerDown={onLayerPointerDown}
+                    selectionColor={selectionColor}
+                    layer={layer}
+                />
+            )
         default:
             break
     }

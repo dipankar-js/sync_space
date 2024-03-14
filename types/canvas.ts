@@ -66,7 +66,7 @@ export type RectangleLayer = {
     x: Number
     y: number
     height: number
-    weight: number
+    width: number
     fill: Color
     value?: string
 }
@@ -76,7 +76,7 @@ export type EllipseLayer = {
     x: Number
     y: number
     height: number
-    weight: number
+    width: number
     fill: Color
     value?: string
 }
@@ -86,7 +86,7 @@ export type PathLayer = {
     x: Number
     y: number
     height: number
-    weight: number
+    width: number
     fill: Color
     points: number[][]
     value?: string
@@ -97,7 +97,7 @@ export type TextLayer = {
     x: Number
     y: number
     height: number
-    weight: number
+    width: number
     fill: Color
     value?: string
 }
@@ -107,7 +107,7 @@ export type NoteLayer = {
     x: Number
     y: number
     height: number
-    weight: number
+    width: number
     fill: Color
     value?: string
 }
