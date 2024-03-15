@@ -156,6 +156,12 @@ const Canvas = ({ boardId }: CanvasProps) => {
         [canvasState]
     )
 
+    const unSelectLayers = useMutation(({ self, setMyPresence }) => {
+        if (self.presence.selection.length > 0) {
+            setMyPresence({ selection: [] }, { addToHistory: true })
+        }
+    }, [])
+
     const onWheel = useCallback((e: React.WheelEvent) => {
         setCamera((camera) => ({
             x: camera.x - e.deltaX,
@@ -182,7 +188,13 @@ const Canvas = ({ boardId }: CanvasProps) => {
         ({}, e) => {
             const point = pointerEventToCanvasPoint(e, camera)
 
-            if (canvasState.mode === CanvasMode.Inserting) {
+            if (
+                canvasState.mode === CanvasMode.None ||
+                canvasState.mode === CanvasMode.Pressing
+            ) {
+                unSelectLayers()
+                setCanvasState({ mode: CanvasMode.None })
+            } else if (canvasState.mode === CanvasMode.Inserting) {
                 insertLayer(canvasState.layerType, point)
             } else {
                 setCanvasState({
@@ -191,7 +203,20 @@ const Canvas = ({ boardId }: CanvasProps) => {
             }
             history.resume()
         },
-        [camera, canvasState, history, insertLayer]
+        [camera, canvasState, history, insertLayer, unSelectLayers]
+    )
+
+    const onPointerDown = useCallback(
+        (e: React.PointerEvent) => {
+            const point = pointerEventToCanvasPoint(e, camera)
+
+            if (canvasState.mode === CanvasMode.Inserting) {
+                return
+            }
+
+            setCanvasState({ origin: point, mode: CanvasMode.Pressing })
+        },
+        [camera, canvasState.mode, setCanvasState]
     )
 
     const selections = useOthersMapped((other) => other.presence.selection)
@@ -257,6 +282,7 @@ const Canvas = ({ boardId }: CanvasProps) => {
                 onPointerMove={onPointerMove}
                 onPointerLeave={onPointerLeave}
                 onPointerUp={onPointerUp}
+                onPointerDown={onPointerDown}
                 className="h-[100vh] w-[100vw]"
             >
                 <g
