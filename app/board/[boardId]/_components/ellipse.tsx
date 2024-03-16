@@ -1,38 +1,38 @@
-import { rgbToHexCode } from "@/lib/utils";
-import { EllipseLayer } from "@/types/canvas";
+import { rgbToHexCode } from '@/lib/utils'
+import { EllipseLayer } from '@/types/canvas'
 
 interface EllipseProps {
-  id: string;
-  layer: EllipseLayer;
-  onPointerDown: (e: React.PointerEvent, id: string) => void;
-  selectionColor?: string;
-};
+    id: string
+    layer: EllipseLayer
+    onPointerDown: (e: React.PointerEvent, id: string) => void
+    selectionColor?: string
+}
 
 const Ellipse = ({
-  id,
-  layer,
-  onPointerDown,
-  selectionColor,
+    id,
+    layer,
+    onPointerDown,
+    selectionColor,
 }: EllipseProps) => {
-  return (
-    <ellipse
-      className="drop-shadow-md"
-      onPointerDown={(e) => onPointerDown(e, id)}
-      style={{
-        transform: `translate(
+    return (
+        <ellipse
+            className="drop-shadow-md"
+            onPointerDown={(e) => onPointerDown(e, id)}
+            style={{
+                transform: `translate(
           ${layer.x}px,
           ${layer.y}px
-        )`
-      }}
-      cx={layer.width / 2}
-      cy={layer.height / 2}
-      rx={layer.width / 2}
-      ry={layer.height / 2}
-      fill={layer.fill ? rgbToHexCode(layer.fill) : "#000"}
-      stroke={selectionColor || "transparent"}
-      strokeWidth="1"
-    />
-  );
-};
+        )`,
+            }}
+            cx={layer.width / 2}
+            cy={layer.height / 2}
+            rx={layer.width / 2}
+            ry={layer.height / 2}
+            fill={layer.fill ? rgbToHexCode(layer.fill) : '#000'}
+            stroke={selectionColor || 'transparent'}
+            strokeWidth="1"
+        />
+    )
+}
 
-export  default Ellipse;
+export default Ellipse

@@ -3,10 +3,13 @@ import { memo } from 'react'
 
 import { useStorage } from '@/liveblocks.config'
 import { LayerType } from '@/types/canvas'
+import { rgbToHexCode } from '@/lib/utils'
 
 import Rectangle from './Rectangle'
 import Ellipse from './ellipse'
 import TextLayer from './text-layer'
+import NoteLayer from './note-layer'
+import Path from './path'
 
 interface LayerPreviewProps {
     id: string
@@ -26,6 +29,27 @@ const LayerPreview = ({
     }
 
     switch (layer.type) {
+        case LayerType.Path:
+            return (
+                <Path
+                    key={id}
+                    points={layer.points}
+                    onPointerDown={(e) => onLayerPointerDown(e, id)}
+                    x={layer.x}
+                    y={layer.y}
+                    fill={layer.fill ? rgbToHexCode(layer.fill) : '#000'}
+                    stroke={selectionColor}
+                />
+            )
+        case LayerType.Note:
+            return (
+                <NoteLayer
+                    id={id}
+                    onPointerDown={onLayerPointerDown}
+                    selectionColor={selectionColor}
+                    layer={layer}
+                />
+            )
         case LayerType.Text:
             return (
                 <TextLayer
