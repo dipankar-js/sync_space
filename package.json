@@ -11,10 +11,6 @@
         "format:fix": "prettier --write --list-different .",
         "convex": "npx convex dev"
     },
-    "engines": {
-        "node": "20.11.1",
-        "npm": "10.2.4"
-    },
     "dependencies": {
         "@clerk/nextjs": "^4.29.5",
         "@liveblocks/client": "^1.9.7",
