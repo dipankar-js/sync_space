@@ -136,3 +136,4 @@ export type Layer =
     | PathLayer
     | NoteLayer
     | TextLayer
+    | any

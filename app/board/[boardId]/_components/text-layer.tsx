@@ -41,7 +41,7 @@ const TextLayer = ({ layer, onPointerDown, id, selectionColor }: TextProps) => {
 
     return (
         <foreignObject
-            x={x}
+            x={x as number}
             y={y}
             width={width}
             height={height}

@@ -1,4 +1,12 @@
-import { Camera, Color, LayerType, Point, Side, XYWH } from '@/types/canvas'
+import {
+    Camera,
+    Color,
+    LayerType,
+    Point,
+    Side,
+    XYWH,
+    PathLayer,
+} from '@/types/canvas'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 

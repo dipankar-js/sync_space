@@ -24,7 +24,7 @@ const Cursors = () => {
 
 const Drafts = () => {
     const others = useOthersMapped(
-        (other) => ({
+        (other: any) => ({
             pencilDraft: other.presence.pencilDraft,
             penColor: other.presence.penColor,
         }),

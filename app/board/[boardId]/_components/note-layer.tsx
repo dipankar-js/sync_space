@@ -46,7 +46,7 @@ const NoteLayer = ({
 
     return (
         <foreignObject
-            x={x}
+            x={x as number}
             y={y}
             width={width}
             height={height}

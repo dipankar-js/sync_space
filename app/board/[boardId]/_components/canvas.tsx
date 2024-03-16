@@ -46,7 +46,7 @@ interface CanvasProps {
 }
 
 const Canvas = ({ boardId }: CanvasProps) => {
-    const layerIds = useStorage((root) => root.layerIds)
+    const layerIds = useStorage((root: any) => root.layerIds)
     const info = useSelf((me) => me.info)
 
     const [camera, setCamera] = useState<Camera>({ x: 0, y: 0 })
@@ -83,7 +83,7 @@ const Canvas = ({ boardId }: CanvasProps) => {
 
             const liveLayerIds = storage.get('layerIds')
             const layerId = nanoid()
-            const layer = new LiveObject({
+            const layer: any = new LiveObject({
                 type: layerType,
                 x: position.x,
                 y: position.y,
@@ -151,7 +151,7 @@ const Canvas = ({ boardId }: CanvasProps) => {
                 const layer = liveLayers.get(id)
                 if (layer) {
                     layer.update({
-                        x: layer.get('x') + offset.x,
+                        x: (layer.get('x') as number) + offset.x,
                         y: layer.get('y') + offset.y,
                     })
                 }
@@ -216,7 +216,9 @@ const Canvas = ({ boardId }: CanvasProps) => {
             const id = nanoid()
             liveLayers.set(
                 id,
-                new LiveObject(penPointsToPathLayer(pencilDraft, lastUsedColor))
+                new LiveObject(
+                    penPointsToPathLayer(pencilDraft, lastUsedColor) as any
+                )
             )
 
             const liveLayerIds = storage.get('layerIds')

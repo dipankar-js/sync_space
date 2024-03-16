@@ -22,7 +22,7 @@ const LayerPreview = ({
     onLayerPointerDown,
     selectionColor,
 }: LayerPreviewProps) => {
-    const layer = useStorage((root) => root.layers.get(id))
+    const layer = useStorage((root: any) => root.layers.get(id))
 
     if (!layer) {
         return null

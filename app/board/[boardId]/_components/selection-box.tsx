@@ -19,7 +19,7 @@ const SelectionBox = memo(
         )
 
         const isShowingHandles = useStorage(
-            (root) =>
+            (root: any) =>
                 soleLayerId &&
                 root.layers.get(soleLayerId)?.type !== LayerType.Path
         )
